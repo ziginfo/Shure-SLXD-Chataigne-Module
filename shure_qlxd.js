@@ -1,9 +1,12 @@
-var flashtime = 4;  //time the flashing indicator stays lit
-var device_flashtime = 0;
+// =========== VARS ===========================
 var channel_1_flashtime = 0;
 var todo = false;
 var string= "" ;
 var ch = 1 ;
+
+// =======================================
+//			FUNCTION INIT
+// =======================================
 
 function init() {
   script.setUpdateRate(1);
@@ -13,6 +16,10 @@ function init() {
 
 function update(delta){
   }
+  
+// =======================================
+//			HELPER
+// =======================================
 
 function toInt(input) {
   //function is used to parse strings with leading 0 to int, parseInt assumes a number in octal representation due to the leading 0, so 05000 becomes 2560. with this function 05000 will be parsed as 5000.
@@ -29,6 +36,10 @@ function toInt(input) {
 
   return parseInt(res);
 }
+
+// =======================================
+//			DATA RECEIVED
+// =======================================
 
 function dataReceived(inputData) {
   // example of incoming messages:
@@ -53,7 +64,7 @@ function dataReceived(inputData) {
       string = string.replace("{", "").replace("}", "");
     }
 
-    // Splitting the string by spaces
+// ========= Splitting the string by spaces ==========
     parts = trimmedStr.split(" ");
 
     if (parts[0] == "REP") {
@@ -61,7 +72,9 @@ function dataReceived(inputData) {
       //TODO: do something with it
       //script.log(parts[2]);
 
-      //DEVICE INFOS
+// =======================================
+// 				DEVICE INFOS 
+// =======================================
       if (parts[1] == "MODEL") {
         local.values.device.modellName.set("QLXD");
       }
@@ -88,7 +101,10 @@ function dataReceived(inputData) {
           local.values.device.flashing.set(false);
         }
       }
-      //CHANNEL INFOS
+// =======================================
+//			 CHANNEL INFOS 
+// =======================================
+
       if (parts[2] == "FLASH") {
         if (parts[3] == "ON") {
           local.values.getChild("channel" + parts[1]).flashing.set(true);
@@ -105,17 +121,11 @@ function dataReceived(inputData) {
           .set(parts[3]);
       }
       if (parts[2] == "METER_RATE") {
-        //root.modules.shureQLX_D.parameters.updateRateCh1
         local.parameters.getChild("updateRateCh" + parts[1]).setData(parts[3]);
       }
       if (parts[2] == "GROUP_CHAN") {
       	var grp_chan = parts[3];
         grp_chan =  grp_chan.split(",");
-        
-//        if (grp_info[0] == "--") {
-//          grp_info[0] = 0; }
-//        if (grp_info[1] == "--") {
-//          grp_info[1] = 0;  }
           
         local.values.channel1.rfGroup.set(grp_chan[0]);
         local.values.channel1.rfChannel.set(grp_chan[1]);
@@ -160,11 +170,7 @@ function dataReceived(inputData) {
         //root.modules.shureQLX_D.values.channel1.audioLevelRMS
         dec = parts[3].substring(parts[3].length - 3, parts[3].length);
         lead = parts[3].substring(0, parts[3].length - 3);
-//        if (lead[0] == 0) {
-//          lead = lead.substring(0, lead.length);  }
-
         local.values.channel1.frequency.set(lead + "." + dec);
-//		  .frequency.set(""+parts[3]+"");
       }
       if (parts[1] == "ENCRYPTION") {
         local.values.channel1.encryption.set(parts[2]);
@@ -258,7 +264,9 @@ function moduleValueChanged(value) {
   }
 }
 
-
+// =======================================
+// 				 REQUESTS 
+// =======================================
 
 function requestModel() {
   //< GET MODEL >
@@ -315,6 +323,9 @@ function getAll() {
   //Message received : < GET 0 ALL >< SET 0 METER_RATE 5000 > //companion init
 }
 
+// =======================================
+//  			 COMMANDS 
+// =======================================
 
 function setDeviceID(newid) {
   local.send("< SET DEVICE_ID {" + newid + "} >");
