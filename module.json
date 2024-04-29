@@ -1,23 +1,24 @@
 {
-  "name": "Shure SLX-D",
+  "name": "Shure QLX-D",
   "type": "TCP Client",
   "path": "Hardware",
 
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "BETA - Monitor and Control Shure SLX-D wireless microphone receivers",
-  "url": "https://github.com/niklasberlin/Shure-SLXD-Chataigne-module",
-  "downloadURL": "https://github.com/niklasberlin/Shure-SLXD-Chataigne-module/archive/refs/heads/main.zip",
+  "url": "https://github.com/ziginfo/Shure-QLXD-Chataigne-module",
+  "downloadURL": "https://github.com/ziginfo/Shure-QLXD-Chataigne-module/archive/refs/heads/main.zip",
 
   "hasInput": true,
   "hasOutput": true,
 
-  "hideDefaultCommands": true,
+  "hideDefaultCommands": false,
 
   "defaults": {
     "autoAdd": false,
     "protocol": "Direct",
     "output": {
       "local": false,
+      "remoteHost" : "192.168.50.78",
       "remotePort": 2202
     }
   },
@@ -61,7 +62,7 @@
     "receiveFrequency"
   ],
 
-  "scripts": ["moduleScript.js"],
+  "scripts": ["shure_qlxd.js"],
 
   "values": {
     "Device": {
@@ -71,12 +72,17 @@
         "type": "Boolean",
         "default": false
       },
-      "Modell Name": {
+      "Model Name": {
         "type": "String",
         "readOnly": true
       },
       "Device ID": {
-        "type": "String"
+        "type": "String",
+         "readOnly": true
+      },
+      "MAC Address": {
+        "type": "String",
+         "readOnly": true
       },
       "RF Band": {
         "type": "String",
@@ -103,20 +109,21 @@
         "type": "Boolean",
         "default": false
       },
+      
       "Name": {
-        "type": "String"
+        "type": "String",
+         "readOnly": true
+      },
+      "Transmitter": {
+        "type": "String",
+         "readOnly": true
       },
       "Audio Gain": {
-        "type": "Integer",
-        "min": -18,
-        "max": 42
+        "type": "String",
+        "readOnly": true
       },
-      "Audio Level Switch": {
-        "type": "Enum",
-        "options": {
-          "MIC": "MIC",
-          "LINE": "LINE"
-        },
+      "RF Power": {
+        "type": "String",
         "readOnly": true
       },
       "Frequency": {
@@ -124,141 +131,71 @@
         "readOnly": true
       },
       "RF Group": {
-        "type": "Integer",
-        "readOnly": true
-      },
-      "RF Channel": {
-        "type": "Integer",
-        "readOnly": true
-      },
-      "Audio Level Peak": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "Audio Level RMS": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "RSSI Ant A": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "RSSI Ant B": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "Transmitter Type": {
         "type": "String",
         "readOnly": true
       },
+      "RF Channel": {
+        "type": "String",
+        "readOnly": true
+      },
+      "Diversity Antenna": {
+        "type": "String",
+        "readOnly": true
+      },
+      "RF Level": {
+        "type": "String",
+        "readOnly": true
+      },
+        "RF Level Peak": {
+        "type": "Float",
+        "ui": "slider" ,
+        "min" : 0 ,
+        "max" : 115 ,
+        "readOnly": true
+      },
+      "Audio Level": {
+        "type": "String",
+        "readOnly": true
+      },
+      "Audio Level Peak": {
+        "type": "Float",
+        "ui": "slider" ,
+        "min" : -50 ,
+        "max" : -0.5 ,
+        "readOnly": true
+      },
+    
       "Battery Runtime": {
         "type": "String",
         "readOnly": true
       },
+      "Battery Type": {
+        "type": "String",
+        "readOnly": true
+      },     
       "Battery Bars": {
         "type": "Enum",
         "options": {
           "unknown": "255",
-          "5/5": "5",
-          "4/5": "4",
-          "3/5": "3",
-          "2/5": "2",
-          "1/5": "1",
-          "0/5": "0"
-        },
-        "readOnly": true
-      }
-    },
-    "Channel 2": {
-      "type": "Container",
-      "collapsed": false,
-      "flashing": {
-        "type": "Boolean",
-        "default": false
-      },
-      "Name": {
-        "type": "String"
-      },
-      "Audio Gain": {
-        "type": "Integer",
-        "min": -18,
-        "max": 42
-      },
-      "Audio Level Switch": {
-        "type": "Enum",
-        "options": {
-          "MIC": "MIC",
-          "LINE": "LINE"
-        },
-        "readOnly": true
-      },
-      "Frequency": {
-        "type": "String",
-        "readOnly": true
-      },
-      "RF Group": {
-        "type": "Integer",
-        "readOnly": true
-      },
-      "RF Channel": {
-        "type": "Integer",
-        "readOnly": true
-      },
-      "Audio Level Peak": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "Audio Level RMS": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "RSSI Ant A": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "RSSI Ant B": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "Transmitter Type": {
-        "type": "String",
-        "readOnly": true
-      },
-      "Battery Runtime": {
-        "type": "String",
-        "readOnly": true
-      },
-      "Battery Bars": {
-        "type": "Enum",
-        "options": {
-          "unknown": "255",
-          "5/5": "5",
-          "4/5": "4",
-          "3/5": "3",
-          "2/5": "2",
-          "1/5": "1",
-          "0/5": "0"
-        },
-        "readOnly": true
-      }
-    }
+         "5/5 full": "5",
+          "4/5 bars": "4",
+          "3/5 bars": "3",
+          "2/5 bars": "2",
+          "1/5 bars": "1",
+          "0/5 alerte !": "0"  },
+        "readOnly": true },
+        
+         "Battery Charge": {
+        "type": "Float",
+        "ui": "slider" ,
+        "min" : 0 ,
+        "max" : 5 ,
+        "readOnly": true }
+       }
+   
   },
+
+
 
   "commands": {
     "Flash receiver": {
