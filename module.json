@@ -3,7 +3,7 @@
   "type": "TCP Client",
   "path": "Hardware",
 
-  "version": "1.0.0",
+  "version": "1.1",
   "description": "BETA - Monitor and Control Shure SLX-D wireless microphone receivers",
   "url": "https://github.com/ziginfo/Shure-QLXD-Chataigne-module",
   "downloadURL": "https://github.com/ziginfo/Shure-QLXD-Chataigne-module/archive/refs/heads/main.zip",
@@ -28,24 +28,14 @@
       "type": "Enum",
       "description": "Select the Update Rate for constantly changing infos (RF Signal Level, Audio Signal Level)",
       "options": {
-        "no Updates": "00000",
-        "very slow (15sec)": "15000",
-        "slow (5sec)": "05000",
-        "medium (2,5sec)": "02500",
-        "fast (1sec)": "01000",
-        "very fast (0.1sec)": "00100"
-      }
-    },
-    "Update Rate Ch 2": {
-      "type": "Enum",
-      "description": "Select the Update Rate for constantly changing infos (RF Signal Level, Audio Signal Level)",
-      "options": {
-        "no Updates": "00000",
-        "very slow (15sec)": "15000",
-        "slow (5sec)": "05000",
-        "medium (2,5sec)": "02500",
-        "fast (1sec)": "01000",
-        "very fast (0.1sec)": "00100"
+       "no Updates": "00000",
+            "very slow (15sec)": "15000",
+            "slow (5sec)": "05000",
+            "medium (2,5sec)": "02500",
+            "fast (1sec)": "01000",
+            "faster (0,5sec)": "00500",
+            "very fast (0.2sec)": "00200",
+            "fastest (0,1sec)": "00100",
       }
     }
   },
@@ -311,7 +301,9 @@
             "slow (5sec)": "05000",
             "medium (2,5sec)": "02500",
             "fast (1sec)": "01000",
-            "very fast (0.1sec)": "00100"
+            "faster (0,5sec)": "00500",
+            "very fast (0.2sec)": "00200",
+            "fastest (0,1sec)": "00100",
           }
         }
       }

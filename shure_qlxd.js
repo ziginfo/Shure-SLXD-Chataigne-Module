@@ -1,7 +1,6 @@
 var flashtime = 4;  //time the flashing indicator stays lit
 var device_flashtime = 0;
 var channel_1_flashtime = 0;
-var channel_2_flashtime = 0;
 var todo = false;
 var string= "" ;
 
@@ -238,12 +237,9 @@ function moduleParameterChanged(param) {
   if (param.name == "isConnected" && param.get() == 1) {
     getAll();
   }
-  if (param.name == "updateRateCh1") {
-    setMeterRate(1, toInt(param.get()));
-  }
-  if (param.name == "updateRateCh2") {
-    setMeterRate(2, toInt(param.get()));
-  }
+	  if (param.name == "updateRateCh1")
+	  var value = local.parameters.updateRateCh1.get() ; 
+	{local.send("< SET 1 METER_RATE " +value+ " >");}
 }
 
 function moduleValueChanged(value) {

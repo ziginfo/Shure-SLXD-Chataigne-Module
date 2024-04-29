@@ -1,6 +1,7 @@
 # Shure QLX-D Chataigne Module
 With this Chataigen Module it is possible to monitor and control your QLX-D wireless microphone system from shure.   
-Remote-Port must be set to 2022   
+Remote-Port must be set to 2022     
+Actual Version : 1.1   
 
 This module is based on the SLXD-Module from [NiklasBerlin](https://github.com/niklasberlin/Shure-SLXD-Chataigne-module)
 
