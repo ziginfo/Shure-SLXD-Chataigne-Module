@@ -18,7 +18,7 @@
     "protocol": "Direct",
     "output": {
       "local": false,
-      "remoteHost" : "192.168.50.78",
+      "remoteHost" : "",
       "remotePort": 2202
     }
   },
