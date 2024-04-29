@@ -130,7 +130,7 @@ function dataReceived(inputData) {
       if (parts[2] == "RX_RF_LVL") {
       var rfparse = parseFloat(parts[3]) ;
       	if (rfparse > 104) {rf = rfparse+" dBm - OverLoad!";}
-         if (rfparse < 30) {rf = "too low !";}
+         if (rfparse < 30) {rf = "RF too low !";}
          else {rf = rfparse+" dBm";}
         local.values.channel1.rfLevel.set(rf);
         local.values.channel1.rfLevelPeak.set(rfparse);
@@ -149,7 +149,11 @@ function dataReceived(inputData) {
       }
       
       if (parts[2] == "RF_ANTENNA") {
-        local.values.channel1.diversityAntenna.set(parts[3]);
+      	var ant = parts[3];
+      	if (ant== "XX" || ant== "" ){ ant = "RF no antenna" ;}
+      	if (ant== "AX"){ ant = "antenna A" ;}
+      	if (ant== "XB"){ ant = "antenna B" ;}
+        local.values.channel1.diversityAntenna.set(ant);
       }
       if (parts[2] == "FREQUENCY") {
         //root.modules.shureQLX_D.parameters.updateRateCh1
@@ -196,7 +200,7 @@ function dataReceived(inputData) {
       if (parts[2] == "ALL") {
       	//A/B Antenna
       	var ant = parts[3];
-      	if (ant== "XX" || ant== "" ){ ant = "no antenna" ;}
+      	if (ant== "XX" || ant== "" ){ ant = "RF no antenna" ;}
       	if (ant== "AX"){ ant = "antenna A" ;}
       	if (ant== "XB"){ ant = "antenna B" ;}
         local.values.channel1.diversityAntenna.set(ant);
@@ -204,7 +208,7 @@ function dataReceived(inputData) {
          //RF Level
          var rfparse = parseFloat(parts[4]) ;
          if (rfparse > 104) {rf = rfparse+" dBm - OverLoad!";}
-         if (rfparse < 30) {rf = "too low !";}
+         if (rfparse < 30) {rf = "RF too low !";}
          else {rf = rfparse+" dBm";}
         local.values.channel1.rfLevel.set(rf);
         local.values.channel1.rfLevelPeak.set(rfparse);
