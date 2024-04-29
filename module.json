@@ -3,7 +3,7 @@
   "type": "TCP Client",
   "path": "Hardware",
 
-  "version": "1.1",
+  "version": "1.2",
   "description": "Monitor and Control for Shure QLX-D wireless systems",
   "url": "https://github.com/ziginfo/Shure-QLXD-Chataigne-module",
   "downloadURL": "https://github.com/ziginfo/Shure-QLXD-Chataigne-module/archive/refs/heads/main.zip",
