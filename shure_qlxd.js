@@ -3,6 +3,7 @@ var device_flashtime = 0;
 var channel_1_flashtime = 0;
 var todo = false;
 var string= "" ;
+var ch = 1 ;
 
 function init() {
   script.setUpdateRate(1);
@@ -309,7 +310,7 @@ function requestChGroup(ch) {
   local.send("< GET " + ch + " GROUP_CHANNEL >");
 }
 
-function requestChFreq(ch) {
+function requestChFreq() {
   //< GET x FREQUENCY >
   local.send("< GET " + ch + " FREQUENCY >");
 }
@@ -332,35 +333,31 @@ function setDeviceID(newid) {
 }
 
 function setChannelName(ch, newName) {
-  if (ch == 1 || ch == 2) {
     local.send(
       "< SET " + ch + " CHAN_NAME {" + newName.substring(0, 8) + "} >"
     );
-  }
+
 }
 
-function setAudioGain(ch, gain) {
-  //< SET x AUDIO_GAIN 40 >
-  if (ch == 1 || ch == 2) {
+function setAudioGain(gain) {
+  //< SET x AUDIO_GAIN 40 > 
     local.send("< SET " + ch + " AUDIO_GAIN " + (gain + 18) + " >");
-  }
+
 }
 
-function incAudioGain(ch, addgain) {
+function incAudioGain(addgain) {
   //< SET x AUDIO_GAIN 40 >
-  if (ch == 1 || ch == 2) {
     local.send("< SET " + ch + " AUDIO_GAIN INC " + addgain + " >");
-  }
+
 }
 
-function decAudioGain(ch, addgain) {
+function decAudioGain(addgain) {
   //< SET x AUDIO_GAIN 40 >
-  if (ch == 1 || ch == 2) {
-    local.send("< SET " + ch + " AUDIO_GAIN DEC " + addgain + " >");
-  }
+	local.send("< SET " + ch + " AUDIO_GAIN DEC " + addgain + " >");
+
 }
 
-function setMeterRate(ch, rate) {
+function setMeterRate(rate) {
   rate = toInt(rate);
   //< SET x METER_RATE 01000 >
   if ((ch == 1 || ch == 2) && ((rate >= 100 && rate <= 65535) || rate == 0)) {

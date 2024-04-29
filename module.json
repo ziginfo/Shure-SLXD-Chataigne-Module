@@ -18,7 +18,7 @@
     "protocol": "Direct",
     "output": {
       "local": false,
-      "remoteHost" : "",
+      "remoteHost" : "192.168.50.78",
       "remotePort": 2202
     }
   },
@@ -214,12 +214,7 @@
       "menu": "",
       "callback": "setChannelName",
       "parameters": {
-        "Channel": {
-          "type": "Integer",
-          "min": 1,
-          "max": 2,
-          "default": 1
-        },
+        
         "new Name": {
           "type": "String"
         }
@@ -229,12 +224,7 @@
       "menu": "",
       "callback": "setAudioGain",
       "parameters": {
-        "Channel": {
-          "type": "Integer",
-          "min": 1,
-          "max": 2,
-          "default": 1
-        },
+       
         "Gain": {
           "type": "Integer",
           "min": -18,
@@ -247,12 +237,7 @@
       "menu": "",
       "callback": "incAudioGain",
       "parameters": {
-        "Channel": {
-          "type": "Integer",
-          "min": 1,
-          "max": 2,
-          "default": 1
-        },
+       
         "Gain increase": {
           "type": "Integer",
           "min": 0,
@@ -265,12 +250,7 @@
       "menu": "",
       "callback": "decAudioGain",
       "parameters": {
-        "Channel": {
-          "type": "Integer",
-          "min": 1,
-          "max": 2,
-          "default": 1
-        },
+       
         "Gain reduction": {
           "type": "Integer",
           "min": 0,
