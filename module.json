@@ -11,7 +11,7 @@
   "hasInput": true,
   "hasOutput": true,
 
-  "hideDefaultCommands": false,
+  "hideDefaultCommands": true,
 
   "defaults": {
     "autoAdd": false,
@@ -35,7 +35,7 @@
             "fast (1sec)": "01000",
             "faster (0,5sec)": "00500",
             "very fast (0.2sec)": "00200",
-            "fastest (0,1sec)": "00100",
+            "fastest (0,1sec)": "00100"
       }
     }
   },
@@ -55,14 +55,11 @@
   "scripts": ["shure_qlxd.js"],
 
   "values": {
+  
     "Device": {
       "type": "Container",
       "collapsed": false,
-      "flashing": {
-        "type": "Boolean",
-        "default": false
-      },
-      "Model Name": {
+     "Model Name": {
         "type": "String",
         "readOnly": true
       },
@@ -92,14 +89,10 @@
         "readOnly": true
       }
     },
+    
     "Channel 1": {
       "type": "Container",
       "collapsed": false,
-      "flashing": {
-        "type": "Boolean",
-        "default": false
-      },
-      
       "Name": {
         "type": "String",
          "readOnly": true
@@ -154,6 +147,10 @@
         "max" : -0.5 ,
         "readOnly": true
       },
+      "Encryption": {
+        "type": "String",
+        "readOnly": true
+      },
     
       "Battery Runtime": {
         "type": "String",
@@ -185,33 +182,29 @@
    
   },
 
-
-
   "commands": {
-    "Flash receiver": {
+     
+    "send Sring": {
       "menu": "",
-      "callback": "setFlashing",
+      "callback": "sendLine",
       "parameters": {
-        "Channel": {
-          "type": "Integer",
-          "min": 0,
-          "max": 2,
-          "default": 0,
-          "description": "use 0 to flash the whole receiver"
+        
+        "Command Line": {
+          "type": "String"
         }
       }
     },
-    "set Device Identifier": {
-      "menu": "",
+    "set Device Name": {
+      "menu": "Actions",
       "callback": "setDeviceID",
       "parameters": {
-        "Identifier": {
+        "Device Name": {
           "type": "String"
         }
       }
     },
     "set Channel Name": {
-      "menu": "",
+      "menu": "Actions",
       "callback": "setChannelName",
       "parameters": {
         
@@ -221,7 +214,7 @@
       }
     },
     "set Audio Gain": {
-      "menu": "",
+      "menu": "Actions",
       "callback": "setAudioGain",
       "parameters": {
        
@@ -234,7 +227,7 @@
       }
     },
     "increase Audio Gain": {
-      "menu": "",
+      "menu": "Actions",
       "callback": "incAudioGain",
       "parameters": {
        
@@ -247,7 +240,7 @@
       }
     },
     "decrease Audio Gain": {
-      "menu": "",
+      "menu": "Actions",
       "callback": "decAudioGain",
       "parameters": {
        
@@ -260,11 +253,11 @@
       }
     },
     "Update all Values": {
-      "menu": "",
+      "menu": "Requests",
       "callback": "getAll"
     },
     "Set Meter Rate": {
-      "menu": "",
+      "menu": "Requests",
       "callback": "setMeterRate",
       "parameters": {
         "Channel": {
@@ -283,7 +276,7 @@
             "fast (1sec)": "01000",
             "faster (0,5sec)": "00500",
             "very fast (0.2sec)": "00200",
-            "fastest (0,1sec)": "00100",
+            "fastest (0,1sec)": "00100"
           }
         }
       }

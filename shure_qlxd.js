@@ -12,24 +12,7 @@ function init() {
 }
 
 function update(delta){
-  if (local.values.device.flashing.get()){
-    device_flashtime +=1;
-    if (device_flashtime >= flashtime){
-      device_flashtime = 0;
-      local.values.device.flashing.set(0);
-    }
   }
-  if (local.values.channel1.flashing.get()){
-    channel_1_flashtime +=1;
-    if (channel_1_flashtime >= flashtime){
-      channel_1_flashtime = 0;
-      local.values.channel1.flashing.set(0);
-    }
-  }
- 
-
-
-}
 
 function toInt(input) {
   //function is used to parse strings with leading 0 to int, parseInt assumes a number in octal representation due to the leading 0, so 05000 becomes 2560. with this function 05000 will be parsed as 5000.
@@ -85,6 +68,7 @@ function dataReceived(inputData) {
       if (parts[1] == "DEVICE_ID") {
         local.values.device.deviceID.set(string);
       }
+      
       if (parts[1] == "MAC_ADDR") {
         local.values.device.macAddress.set(parts[2]);
       }
@@ -144,11 +128,14 @@ function dataReceived(inputData) {
         local.values.channel1.audioGain.set(val);
       }
       if (parts[2] == "RX_RF_LVL") {
-      var rflvl = parseInt(parts[3]) - 120 ;
-        //root.modules.shureQLX_D.values.channel1.rssiAntA
-    		local.values.channel1.rfLevel.set(parts[3]);
-
+      var rfparse = parseFloat(parts[3]) ;
+      	if (rfparse > 104) {rf = rfparse+" dBm - OverLoad!";}
+         if (rfparse < 30) {rf = "too low !";}
+         else {rf = rfparse+" dBm";}
+        local.values.channel1.rfLevel.set(rf);
+        local.values.channel1.rfLevelPeak.set(rfparse);
       }
+               
       if (parts[2] == "AUDIO_LVL") {
       var parselvl = parseFloat(parts[3]);
       var level = parselvl - 50 ;
@@ -174,6 +161,9 @@ function dataReceived(inputData) {
 
         local.values.channel1.frequency.set(lead + "." + dec);
 //		  .frequency.set(""+parts[3]+"");
+      }
+      if (parts[1] == "ENCRYPTION") {
+        local.values.channel1.encryption.set(parts[2]);
       }
        if (parts[2] == "BATT_TYPE") {
         //root.modules.shureQLX_D.values.channel1.batteryBars
@@ -214,6 +204,7 @@ function dataReceived(inputData) {
          //RF Level
          var rfparse = parseFloat(parts[4]) ;
          if (rfparse > 104) {rf = rfparse+" dBm - OverLoad!";}
+         if (rfparse < 30) {rf = "too low !";}
          else {rf = rfparse+" dBm";}
         local.values.channel1.rfLevel.set(rf);
         local.values.channel1.rfLevelPeak.set(rfparse);
@@ -320,23 +311,18 @@ function getAll() {
   //Message received : < GET 0 ALL >< SET 0 METER_RATE 5000 > //companion init
 }
 
-function setFlashing(ch) {
-  if (typeof ch == "undefined" || ch == 0) {
-    local.send("< SET FLASH ON >");
-  } else if (ch == 1 || ch == 2) {
-    local.send("< SET " + ch + " FLASH ON >");
-  }
-}
 
 function setDeviceID(newid) {
   local.send("< SET DEVICE_ID {" + newid + "} >");
 }
 
-function setChannelName(ch, newName) {
-    local.send(
-      "< SET " + ch + " CHAN_NAME {" + newName.substring(0, 8) + "} >"
-    );
+function sendLine(line) {
+    local.send(line );
+}
 
+function setChannelName(newName) {
+    local.send(
+      "< SET " + ch + " CHAN_NAME {" +newName+ "} >" );
 }
 
 function setAudioGain(gain) {
