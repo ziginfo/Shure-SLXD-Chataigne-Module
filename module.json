@@ -5,8 +5,8 @@
 
   "version": "1.2",
   "description": "Monitor and Control for Shure QLX-D wireless systems",
-  "url": "https://github.com/ziginfo/Shure-QLXD-Chataigne-module",
-  "downloadURL": "https://github.com/ziginfo/Shure-QLXD-Chataigne-module/archive/refs/heads/main.zip",
+  "url": "https://github.com/ziginfo/Shure-QLXD-Chataigne-Module",
+  "downloadURL": "https://github.com/ziginfo/Shure-QLXD-Chataigne-Module/archive/refs/heads/main.zip",
 
   "hasInput": true,
   "hasOutput": true,
