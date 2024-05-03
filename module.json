@@ -3,10 +3,10 @@
   "type": "TCP Client",
   "path": "Hardware",
 
-  "version": "0.9.1",
-  "description": "BETA - Monitor and Control Shure SLX-D wireless microphone receivers",
-  "url": "https://github.com/niklasberlin/Shure-SLXD-Chataigne-module",
-  "downloadURL": "https://github.com/niklasberlin/Shure-SLXD-Chataigne-module/archive/refs/heads/main.zip",
+  "version": "1.3",
+  "description": "Monitor and Control Shure SLX-D wireless systems",
+  "url": "https://github.com/ziginfo/Shure-SLXD-Chataigne-Module",
+  "downloadURL": "https://github.com/ziginfo/Shure-SLXD-Chataigne-Module/archive/refs/heads/main.zip",
 
   "hasInput": true,
   "hasOutput": true,
@@ -18,6 +18,7 @@
     "protocol": "Direct",
     "output": {
       "local": false,
+       "remoteHost" : "",
       "remotePort": 2202
     }
   },
@@ -27,24 +28,28 @@
       "type": "Enum",
       "description": "Select the Update Rate for constantly changing infos (RF Signal Level, Audio Signal Level)",
       "options": {
-        "no Updates": "00000",
-        "very slow (15sec)": "15000",
-        "slow (5sec)": "05000",
-        "medium (2,5sec)": "02500",
-        "fast (1sec)": "01000",
-        "very fast (0.1sec)": "00100"
+    		"no Updates": "00000",
+            "very slow (15sec)": "15000",
+            "slow (5sec)": "05000",
+            "medium (2,5sec)": "02500",
+            "fast (1sec)": "01000",
+            "faster (0,5sec)": "00500",
+            "very fast (0.2sec)": "00200",
+            "fastest (0,1sec)": "00100"
       }
     },
     "Update Rate Ch 2": {
       "type": "Enum",
       "description": "Select the Update Rate for constantly changing infos (RF Signal Level, Audio Signal Level)",
       "options": {
-        "no Updates": "00000",
-        "very slow (15sec)": "15000",
-        "slow (5sec)": "05000",
-        "medium (2,5sec)": "02500",
-        "fast (1sec)": "01000",
-        "very fast (0.1sec)": "00100"
+    		"no Updates": "00000",
+            "very slow (15sec)": "15000",
+            "slow (5sec)": "05000",
+            "medium (2,5sec)": "02500",
+            "fast (1sec)": "01000",
+            "faster (0,5sec)": "00500",
+            "very fast (0.2sec)": "00200",
+            "fastest (0,1sec)": "00100"
       }
     }
   },
@@ -61,195 +66,15 @@
     "receiveFrequency"
   ],
 
-  "scripts": ["moduleScript.js"],
+  "scripts": ["slxd.js"],
 
   "values": {
-    "Device": {
-      "type": "Container",
-      "collapsed": false,
-      "flashing": {
-        "type": "Boolean",
-        "default": false
-      },
-      "Modell Name": {
-        "type": "String",
-        "readOnly": true
-      },
-      "Device ID": {
-        "type": "String"
-      },
-      "RF Band": {
-        "type": "String",
-        "readOnly": true
-      },
-      "Lock Status": {
-        "type": "Enum",
-        "options": {
-          "OFF": "OFF",
-          "MENU": "MENU",
-          "ALL": "ALL"
-        },
-        "readOnly": true
-      },
-      "FW Version": {
-        "type": "String",
-        "readOnly": true
-      }
-    },
-    "Channel 1": {
-      "type": "Container",
-      "collapsed": false,
-      "flashing": {
-        "type": "Boolean",
-        "default": false
-      },
-      "Name": {
-        "type": "String"
-      },
-      "Audio Gain": {
-        "type": "Integer",
-        "min": -18,
-        "max": 42
-      },
-      "Audio Level Switch": {
-        "type": "Enum",
-        "options": {
-          "MIC": "MIC",
-          "LINE": "LINE"
-        },
-        "readOnly": true
-      },
-      "Frequency": {
-        "type": "String",
-        "readOnly": true
-      },
-      "RF Group": {
-        "type": "Integer",
-        "readOnly": true
-      },
-      "RF Channel": {
-        "type": "Integer",
-        "readOnly": true
-      },
-      "Audio Level Peak": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "Audio Level RMS": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "RSSI Ant": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "Transmitter Type": {
-        "type": "String",
-        "readOnly": true
-      },
-      "Battery Runtime": {
-        "type": "String",
-        "readOnly": true
-      },
-      "Battery Bars": {
-        "type": "Enum",
-        "options": {
-          "unknown": "255",
-          "5/5": "5",
-          "4/5": "4",
-          "3/5": "3",
-          "2/5": "2",
-          "1/5": "1",
-          "0/5": "0"
-        },
-        "readOnly": true
-      }
-    },
-    "Channel 2": {
-      "type": "Container",
-      "collapsed": false,
-      "flashing": {
-        "type": "Boolean",
-        "default": false
-      },
-      "Name": {
-        "type": "String"
-      },
-      "Audio Gain": {
-        "type": "Integer",
-        "min": -18,
-        "max": 42
-      },
-      "Audio Level Switch": {
-        "type": "Enum",
-        "options": {
-          "MIC": "MIC",
-          "LINE": "LINE"
-        },
-        "readOnly": true
-      },
-      "Frequency": {
-        "type": "String",
-        "readOnly": true
-      },
-      "RF Group": {
-        "type": "Integer",
-        "readOnly": true
-      },
-      "RF Channel": {
-        "type": "Integer",
-        "readOnly": true
-      },
-      "Audio Level Peak": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "Audio Level RMS": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "RSSI Ant": {
-        "type": "Integer",
-        "min": -120,
-        "max": 0,
-        "readOnly": true
-      },
-      "Transmitter Type": {
-        "type": "String",
-        "readOnly": true
-      },
-      "Battery Runtime": {
-        "type": "String",
-        "readOnly": true
-      },
-      "Battery Bars": {
-        "type": "Enum",
-        "options": {
-          "unknown": "255",
-          "5/5": "5",
-          "4/5": "4",
-          "3/5": "3",
-          "2/5": "2",
-          "1/5": "1",
-          "0/5": "0"
-        },
-        "readOnly": true
-      }
-    }
   },
 
   "commands": {
-    "Flash receiver": {
+  
+    
+    "set Flash": {
       "menu": "",
       "callback": "setFlashing",
       "parameters": {
@@ -262,17 +87,28 @@
         }
       }
     },
-    "set Device Identifier": {
+    	"send String": {
       "menu": "",
+      "callback": "sendLine",
+      "parameters": {    
+        "Command Line": {
+          "type": "String",
+          "default": "< INSERT THE COMMAND HERE >",
+          "multiline" : true
+        }
+      }
+    },
+    "set Transmitter Name": {
+      "menu": "Controls",
       "callback": "setDeviceID",
       "parameters": {
-        "Identifier": {
+        "Receiver ID": {
           "type": "String"
         }
       }
     },
     "set Channel Name": {
-      "menu": "",
+      "menu": "Controls",
       "callback": "setChannelName",
       "parameters": {
         "Channel": {
@@ -287,7 +123,7 @@
       }
     },
     "set Audio Gain": {
-      "menu": "",
+      "menu": "Controls",
       "callback": "setAudioGain",
       "parameters": {
         "Channel": {
@@ -305,7 +141,7 @@
       }
     },
     "increase Audio Gain": {
-      "menu": "",
+      "menu": "Controls",
       "callback": "incAudioGain",
       "parameters": {
         "Channel": {
@@ -323,7 +159,7 @@
       }
     },
     "decrease Audio Gain": {
-      "menu": "",
+      "menu": "Controls",
       "callback": "decAudioGain",
       "parameters": {
         "Channel": {
@@ -341,11 +177,33 @@
       }
     },
     "Update all Values": {
-      "menu": "",
+      "menu": "Requests",
       "callback": "getAll"
     },
+    "Requests": {
+      "menu": "Requests",
+      "callback": "requests",
+      "parameters": {
+        "Rate": {
+          "type": "Enum",
+          "options": {
+            "get All": "< GET 0 ALL >",
+            "get RF Level": "< GET 0 RSSI >",
+            "get Audio Level RMS": "< GET 0 AUDIO_LEVEL_RMS >",
+            "get Audio Level Peak": "< GET 0 AUDIO_LEVEL_PEAK >",
+            "get Audio Gain": "< GET 0 AUDIO_GAIN >",
+            "get Battery Bars": "< GET 0 TX_BATT_BARS >",
+            "get Transmitter Name": "< GET 0 TX_MODEL >",
+            "get Channel Name": "< GET 0 CHAN_NAME >",
+            "get Firmware": "< GET FW_VER >",
+            "get RF Band": "< GET RF_BAND >",
+            "get Lock Status": "< GET LOCK_STATUS >",
+            "get Frequency": "< GET 0 FREQUENCY >",
+            "get Group&Channel": "< GET 0 GROUP_CHANNEL >"  }  }
+      }
+    },
     "Set Meter Rate": {
-      "menu": "",
+      "menu": "Requests",
       "callback": "setMeterRate",
       "parameters": {
         "Channel": {
@@ -362,7 +220,9 @@
             "slow (5sec)": "05000",
             "medium (2,5sec)": "02500",
             "fast (1sec)": "01000",
-            "very fast (0.1sec)": "00100"
+            "faster (0,5sec)": "00500",
+            "very fast (0.2sec)": "00200",
+            "fastest (0,1sec)": "00100"
           }
         }
       }
