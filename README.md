@@ -9,7 +9,7 @@ I have two more Chataigne-Modules for other Shure Wireless-Systems (QLXD and ULX
 https://github.com/ziginfo/Shure-QLXD-Chataigne-Module    
 https://github.com/ziginfo/Shure-ULXD-Chataigne-Module    
 
-## copyright
+#### copyright
 The Shure Icon is copyrighted by Shure Incorporated    
 
 Have Fun
