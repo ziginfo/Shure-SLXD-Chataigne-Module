@@ -237,7 +237,7 @@ function dataReceived(inputData) {
         }
         key = "channel" + parts[1] + ".audioGain";
         last_received[key] = util.getTime();
-        var gain = parseInt(parts[3]) - 18 ;
+        var gain = parseFloat(parts[3]) - 18 ;
         local.values
           .getChild("channel" + parts[1])
           .audioGain.set(gain+" db");
@@ -361,8 +361,7 @@ function dataReceived(inputData) {
 // =======================================
 
 function moduleParameterChanged(param) {
-  //script.log(param.name + " parameter changed, new value: " + param.get());
-  //root.modules.shureSLX_D.parameters.output.isConnected
+
   if (param.name == "isConnected" && param.get() == 1) {
     getAll();
   }
